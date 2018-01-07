@@ -1,0 +1,8 @@
+This skill gives you the ability to play with a virtual cat inside your Alexa Show or Spot.
+
+Kitty likes to interact with you. Say things like 
+- 'Throw kitty the ball' 
+- 'Dance kitty'
+- 'Feed the kitty' 
+- 'Play with kitty'
+- 'Sing kitty'
