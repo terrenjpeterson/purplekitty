@@ -1,5 +1,5 @@
 /**
- * This is the piano player skill for Amazon Alexa
+ * This is the purple kitty skill for Amazon Alexa
  */
 
 var Alexa = require('alexa-sdk');
@@ -66,6 +66,7 @@ exports.handler = function (event, context, callback) {
 var newSessionHandler = {
     'LaunchRequest': function () {
         console.log("Native Launch Request");
+        console.log(JSON.stringify(this.event));
         // move next utterance to use start mode
         this.handler.state = states.STARTMODE;
         // Display.RenderTemplate directives can be added to the response
@@ -86,12 +87,15 @@ var newSessionHandler = {
         }
     },
     'AMAZON.HelpIntent': function () {
+	console.log("Help Request");
         // move next utterance to use start mode
         this.handler.state = states.STARTMODE;
         this.emit(':ask', helpMessage, helpMessage);
     },
     // this plays the dance video
     'Dance': function() {
+	console.log("Dance Request");
+        console.log(JSON.stringify(this.event));
         // move next utterance to use start mode
         this.handler.state = states.STARTMODE;
         // Display.RenderTemplate directives can be added to the response
@@ -120,6 +124,8 @@ var newSessionHandler = {
     },
     // this plays the dance video
     'Feed': function() {
+	console.log("Feed the kitty");
+        console.log(JSON.stringify(this.event));
         // move next utterance to use start mode
         this.handler.state = states.STARTMODE;
         // Display.RenderTemplate directives can be added to the response
@@ -146,6 +152,8 @@ var newSessionHandler = {
     },
     // this plays the dance video
     'ThrowBall': function() {
+	console.log("Throw the Ball to kitty");
+        console.log(JSON.stringify(this.event));
         // move next utterance to use start mode
         this.handler.state = states.STARTMODE;
         // Display.RenderTemplate directives can be added to the response
@@ -172,6 +180,8 @@ var newSessionHandler = {
     },
     // this plays the basic cat video
     'Play': function() {
+	console.log("Play with kitty");
+        console.log(JSON.stringify(this.event));
         // move next utterance to use start mode
         this.handler.state = states.STARTMODE;
         // Display.RenderTemplate directives can be added to the response
@@ -198,6 +208,8 @@ var newSessionHandler = {
     },
     // this makes the kitty sing
     'Sing': function() {
+	console.log("Ask the kitty to sing");
+        console.log(JSON.stringify(this.event));
         // move next utterance to use start mode
         this.handler.state = states.STARTMODE;
         // Display.RenderTemplate directives can be added to the response
@@ -243,6 +255,7 @@ var startLessonHandlers = Alexa.CreateStateHandler(states.STARTMODE, {
          this.emit(':ask', promptToStartMessage, promptToStartMessage);
     },
     'AMAZON.HelpIntent': function () {
+	console.log("Ask for help");
         this.emit(':ask', helpMessage, helpMessage);
     },
     'Welcome': function() {
@@ -280,6 +293,7 @@ var startLessonHandlers = Alexa.CreateStateHandler(states.STARTMODE, {
     },
     // this plays the dance video
     'Feed': function() {
+	console.log("Feed the kitty");
         // Display.RenderTemplate directives can be added to the response
         const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
         const imageLoc = kittyBackground;
@@ -304,6 +318,7 @@ var startLessonHandlers = Alexa.CreateStateHandler(states.STARTMODE, {
     },
     // this plays the dance video
     'ThrowBall': function() {
+	console.log("Throw the ball to kitty");
         // Display.RenderTemplate directives can be added to the response
         const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
         const imageLoc = kittyBackground;
@@ -328,6 +343,7 @@ var startLessonHandlers = Alexa.CreateStateHandler(states.STARTMODE, {
     },
     // this plays the basic cat video
     'Play': function() {
+	console.log("Ask the kitty to play");
         // Display.RenderTemplate directives can be added to the response
         const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
         const imageLoc = kittyBackground;
@@ -352,6 +368,7 @@ var startLessonHandlers = Alexa.CreateStateHandler(states.STARTMODE, {
     },
     // this makes the kitty sing     
     'Sing': function() {
+	console.log("Ask the kitty to Sing");
         // move next utterance to use start mode
         this.handler.state = states.STARTMODE;
         // Display.RenderTemplate directives can be added to the response

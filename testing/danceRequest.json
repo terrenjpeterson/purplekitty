@@ -1,0 +1,46 @@
+{
+    "session": {
+        "sessionId": "SessionId.664365d0-92a0-4b59-8d4a-faff28cc6246",
+        "application": {
+            "applicationId": "amzn1.ask.skill.2b1c1e58-ff39-4c86-a948-470939d2b4ab"
+        },
+        "attributes": {},
+        "user": {
+            "userId": "amzn1.ask.account.A123",
+            "accessToken": null
+        },
+        "new": true
+    },
+    "request": {
+        "intent": {
+            "name": "Dance",
+            "slots": {}
+        },
+        "requestId": "EdwRequestId.4220c941-5ac2-4592-8956-80b8d8dcf4f1",
+        "type": "IntentRequest",
+        "locale": "en-US",
+        "timestamp": "2018-01-07T23:48:38Z"
+    },
+    "context": {
+        "AudioPlayer": {
+            "playerActivity": "IDLE"
+        },
+        "System": {
+            "application": {
+                "applicationId": "amzn1.ask.skill.2b1c1e58-ff39-4c86-a948-470939d2b4ab"
+            },
+            "user": {
+                "userId": "amzn1.ask.account.A123"
+            },
+            "device": {
+                "supportedInterfaces": {
+                    "Display": {
+                        "templateVersion": "1",
+                        "markupVersion": "1"
+                    }
+                }
+            }
+        }
+    },
+    "version": "1.0"
+}
