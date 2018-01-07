@@ -2,6 +2,8 @@
 
 This is a video skill for the Alexa platform. It provides the ability to interact with a digital pet through mp4 files embedded in an Alexa skill.
 
+![](media/logo-108x108.png)
+
 **Table of Contents**
 
 - [How does this work?](#skill-overview)
