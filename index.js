@@ -43,11 +43,10 @@ const unhandledMessage = "I'm sorry, I didn't understand your request. Would you
    "teach you a song? If so, please say something like, List Songs, to get started.";
 
 // These are the backgrounds used to display on the screen including the initial launch
-const musicBackground = 'https://s3.amazonaws.com/pianoplayerskill/logos/pianoKeyboard.jpg';
-const pianoStrings = 'https://s3.amazonaws.com/pianoplayerskill/logos/pianoStrings.jpg';
+const kittyBackground = 'https://s3.amazonaws.com/purplekitty/images/background.png';
 
 // These are the folders where the mp3 & mp4 files are located
-const videoLoc = 'https://s3.amazonaws.com/purplekitty';
+const videoLoc = 'https://s3.amazonaws.com/purplekitty/';
 
 // titles played on the video player
 const skillTitle = "Purple Kitty";
@@ -71,7 +70,7 @@ var newSessionHandler = {
         this.handler.state = states.STARTMODE;
         // Display.RenderTemplate directives can be added to the response
         const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
-        const imageLoc = musicBackground;
+        const imageLoc = kittyBackground;
         const template = builder.setTitle(skillDesc)
                                                         .setBackgroundImage(makeImage(imageLoc))
                                                         .setTextContent(makePlainText(skillTitle))
@@ -80,15 +79,7 @@ var newSessionHandler = {
         if (this.event.context.System.device.supportedInterfaces.Display) {
             this.response.speak(welcomeMessage).listen(repeatWelcomeMessage).renderTemplate(template);
             console.log("this was requested by an Echo Show");
-            this.attributes['EchoShow'] = true;
             this.emit(':responseReady');
-
-            const videoClip = videoLoc + "Kitty.mp4";
-            const metadata = {
-                'title': 'Purple Kitty'
-            };
-            this.response.playVideo(videoClip, metadata);
-            console.log("Invoked from video playing device");
         } else {
             this.attributes['EchoShow'] = false;
             this.emit(':tell', noVideoMessage);
@@ -105,17 +96,15 @@ var newSessionHandler = {
         this.handler.state = states.STARTMODE;
         // Display.RenderTemplate directives can be added to the response
         const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
-        const imageLoc = musicBackground;
+        const imageLoc = kittyBackground;
         const template = builder.setTitle(skillDesc)
                                                         .setBackgroundImage(makeImage(imageLoc))
                                                         .setTextContent(makePlainText(skillTitle))
                                                         .build();
 
         if (this.event.context.System.device.supportedInterfaces.Display) {
-            this.response.speak(welcomeMessage).listen(repeatWelcomeMessage).renderTemplate(template);
+            this.response.renderTemplate(template);
             console.log("this was requested by an Echo Show");
-            this.attributes['EchoShow'] = true;
-            this.emit(':responseReady');
 
             const videoClip = videoLoc + "Dance.mp4";
             const metadata = {
@@ -123,6 +112,7 @@ var newSessionHandler = {
             };
             this.response.playVideo(videoClip, metadata);
             console.log("Invoked from video playing device");
+            this.emit(':responseReady');
         } else {
             this.attributes['EchoShow'] = false;
             this.emit(':tell', noVideoMessage);
@@ -134,24 +124,21 @@ var newSessionHandler = {
         this.handler.state = states.STARTMODE;
         // Display.RenderTemplate directives can be added to the response
         const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
-        const imageLoc = musicBackground;
+        const imageLoc = kittyBackground;
         const template = builder.setTitle(skillDesc)
                                                         .setBackgroundImage(makeImage(imageLoc))
                                                         .setTextContent(makePlainText(skillTitle))
                                                         .build();
 
         if (this.event.context.System.device.supportedInterfaces.Display) {
-            this.response.speak(welcomeMessage).listen(repeatWelcomeMessage).renderTemplate(template);
             console.log("this was requested by an Echo Show");
-            this.attributes['EchoShow'] = true;
-            this.emit(':responseReady');
-
             const videoClip = videoLoc + "Feed.mp4";
             const metadata = {
                 'title': 'Purple Kitty'
             };
             this.response.playVideo(videoClip, metadata);
             console.log("Invoked from video playing device");
+            this.emit(':responseReady');
         } else {
             this.attributes['EchoShow'] = false;
             this.emit(':tell', noVideoMessage);
@@ -163,24 +150,21 @@ var newSessionHandler = {
         this.handler.state = states.STARTMODE;
         // Display.RenderTemplate directives can be added to the response
         const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
-        const imageLoc = musicBackground;
+        const imageLoc = kittyBackground;
         const template = builder.setTitle(skillDesc)
                                                         .setBackgroundImage(makeImage(imageLoc))
                                                         .setTextContent(makePlainText(skillTitle))
                                                         .build();
 
         if (this.event.context.System.device.supportedInterfaces.Display) {
-            this.response.speak(welcomeMessage).listen(repeatWelcomeMessage).renderTemplate(template);
             console.log("this was requested by an Echo Show");
-            this.attributes['EchoShow'] = true;
-            this.emit(':responseReady');
-
             const videoClip = videoLoc + "Ball.mp4";
             const metadata = {
                 'title': 'Purple Kitty'
             };
             this.response.playVideo(videoClip, metadata);
             console.log("Invoked from video playing device");
+            this.emit(':responseReady');
         } else {
             this.attributes['EchoShow'] = false;
             this.emit(':tell', noVideoMessage);
@@ -192,24 +176,47 @@ var newSessionHandler = {
         this.handler.state = states.STARTMODE;
         // Display.RenderTemplate directives can be added to the response
         const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
-        const imageLoc = musicBackground;
+        const imageLoc = kittyBackground;
         const template = builder.setTitle(skillDesc)
                                                         .setBackgroundImage(makeImage(imageLoc))
                                                         .setTextContent(makePlainText(skillTitle))
                                                         .build();
 
         if (this.event.context.System.device.supportedInterfaces.Display) {
-            this.response.speak(welcomeMessage).listen(repeatWelcomeMessage).renderTemplate(template);
             console.log("this was requested by an Echo Show");
-            this.attributes['EchoShow'] = true;
-            this.emit(':responseReady');
-
             const videoClip = videoLoc + "Kitty.mp4";
             const metadata = {
                 'title': 'Purple Kitty'
             };
             this.response.playVideo(videoClip, metadata);
             console.log("Invoked from video playing device");
+            this.emit(':responseReady');
+        } else {
+            this.attributes['EchoShow'] = false;
+            this.emit(':tell', noVideoMessage);
+        }
+    },
+    // this makes the kitty sing
+    'Sing': function() {
+        // move next utterance to use start mode
+        this.handler.state = states.STARTMODE;
+        // Display.RenderTemplate directives can be added to the response
+        const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
+        const imageLoc = kittyBackground;
+        const template = builder.setTitle(skillDesc)
+                                                        .setBackgroundImage(makeImage(imageLoc))
+                                                        .setTextContent(makePlainText(skillTitle))
+                                                        .build();
+
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+            console.log("this was requested by an Echo Show");
+            const videoClip = videoLoc + "Sing.mp4";
+            const metadata = {
+                'title': 'Purple Kitty'
+            };
+            this.response.playVideo(videoClip, metadata);
+            console.log("Invoked from video playing device");
+            this.emit(':responseReady');
         } else {
             this.attributes['EchoShow'] = false;
             this.emit(':tell', noVideoMessage);
@@ -245,6 +252,129 @@ var startLessonHandlers = Alexa.CreateStateHandler(states.STARTMODE, {
     'SessionEndedRequest': function() {
 	console.log("Session ended");
 	this.emit(':tell', goodbyeMessage);
+    },
+    // this plays the dance video
+    'Dance': function() {
+        // Display.RenderTemplate directives can be added to the response
+	console.log("Dance routine requested");
+        const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
+        const imageLoc = kittyBackground;
+        const template = builder.setTitle(skillDesc)
+                                                        .setBackgroundImage(makeImage(imageLoc))
+                                                        .setTextContent(makePlainText(skillTitle))
+                                                        .build();
+
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+            console.log("this was requested by an Echo Show");
+            const videoClip = videoLoc + "Dance.mp4";
+            const metadata = {
+                'title': 'Purple Kitty'
+            };
+            this.response.playVideo(videoClip, metadata);
+            console.log("Invoked from video playing device");
+	    this.emit(':responseReady');
+        } else {
+            this.attributes['EchoShow'] = false;
+            this.emit(':tell', noVideoMessage);
+        }
+    },
+    // this plays the dance video
+    'Feed': function() {
+        // Display.RenderTemplate directives can be added to the response
+        const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
+        const imageLoc = kittyBackground;
+        const template = builder.setTitle(skillDesc)
+                                                        .setBackgroundImage(makeImage(imageLoc))
+                                                        .setTextContent(makePlainText(skillTitle))
+                                                        .build();
+
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+            console.log("this was requested by an Echo Show");
+            const videoClip = videoLoc + "Feed.mp4";
+            const metadata = {
+                'title': 'Purple Kitty'
+            };
+            this.response.playVideo(videoClip, metadata);
+            console.log("Invoked from video playing device");
+            this.emit(':responseReady');
+        } else {
+            this.attributes['EchoShow'] = false;
+            this.emit(':tell', noVideoMessage);
+        }
+    },
+    // this plays the dance video
+    'ThrowBall': function() {
+        // Display.RenderTemplate directives can be added to the response
+        const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
+        const imageLoc = kittyBackground;
+        const template = builder.setTitle(skillDesc)
+                                                        .setBackgroundImage(makeImage(imageLoc))
+                                                        .setTextContent(makePlainText(skillTitle))
+                                                        .build();
+
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+            console.log("this was requested by an Echo Show");
+            const videoClip = videoLoc + "Ball.mp4";
+            const metadata = {
+                'title': 'Purple Kitty'
+            };
+            this.response.playVideo(videoClip, metadata);
+            console.log("Invoked from video playing device");
+            this.emit(':responseReady');
+        } else {
+            this.attributes['EchoShow'] = false;
+            this.emit(':tell', noVideoMessage);
+        }
+    },
+    // this plays the basic cat video
+    'Play': function() {
+        // Display.RenderTemplate directives can be added to the response
+        const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
+        const imageLoc = kittyBackground;
+        const template = builder.setTitle(skillDesc)
+                                                        .setBackgroundImage(makeImage(imageLoc))
+                                                        .setTextContent(makePlainText(skillTitle))
+                                                        .build();
+
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+            console.log("this was requested by an Echo Show");
+            const videoClip = videoLoc + "Kitty.mp4";
+            const metadata = {
+                'title': 'Purple Kitty'
+            };
+            this.response.playVideo(videoClip, metadata);
+            console.log("Invoked from video playing device");
+            this.emit(':responseReady');
+        } else {
+            this.attributes['EchoShow'] = false;
+            this.emit(':tell', noVideoMessage);
+        }
+    },
+    // this makes the kitty sing     
+    'Sing': function() {
+        // move next utterance to use start mode
+        this.handler.state = states.STARTMODE;
+        // Display.RenderTemplate directives can be added to the response
+        const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
+        const imageLoc = kittyBackground;
+        const template = builder.setTitle(skillDesc)
+                                                        .setBackgroundImage(makeImage(imageLoc))
+                                                        .setTextContent(makePlainText(skillTitle))
+                                                        .build();
+
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+            console.log("this was requested by an Echo Show");
+            const videoClip = videoLoc + "Sing.mp4";
+            const metadata = {
+                'title': 'Purple Kitty'
+            };
+            this.response.playVideo(videoClip, metadata);
+            console.log("Invoked from video playing device");
+            this.emit(':responseReady');
+        } else {
+            this.attributes['EchoShow'] = false;
+            this.emit(':tell', noVideoMessage);
+        }
     },
     'Unhandled': function () {
     	console.log("Unhandled event");
