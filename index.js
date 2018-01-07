@@ -16,42 +16,20 @@ var states = {
 // These are messages that Alexa says to the user during conversation
 
 // This is the intial welcome message
-const welcomeMessage = "Welcome to the piano teacher skill, your personal instructor. " +
-    "To get started, say 'List Lessons', 'List Songs', or 'Play musical note guessing game'.";
+const welcomeMessage = "Hello. This is Purple Kitty. Your personal pet on the Alexa. " +
+    "To get started, say something like 'Dance' or 'Throw kitty the ball'.";
 
 // This is the message that is repeated if the response to the initial welcome message is not heard
-const repeatWelcomeMessage = "You are currently using the piano teacher skill. This skill is designed " +
-    "to teach beginner lessons on the piano. Say something like, Teach me how to play " +
-    "Mary Had a Little Lamb, to get started, or ask for help.";
+const repeatWelcomeMessage = "You are currently using the purple kitty skill. Kitty is waiting for you to " +
+    "do something. Say 'Play with kitty' or 'Feed the kitty' to begin.";
 
 // this is the message that is repeated if Alexa does not hear/understand the reponse to the welcome message
-const promptToStartMessage = "Say something like, List Songs or List Lessons, to get started.";
+const promptToStartMessage = "Say something like, Feed, Play, Dance, or Throw Ball to get started.";
 
-// this is the help message during the setup at the beginning of the game
-const helpMessage = "This skill has the ability to provide beginner lessons for the piano. " +
-    "To begin, say, List Lessons, and I will go through some helpful lessons to get started. " +
-    "One of those lessons is to teach how to play the scale. Just say 'Play the Scale', and " +
-    "I will go through the individual notes on a scale. " +
-    "As you are beginning to learn musical notes, see how well you can recognize them " +
-    "by saying 'Play musical note guessing game' and see how many notes in a row you can recognize. " +
-    "There are also many different songs that I can teach. Say, 'List Songs' " +
-    "for a complete list, then ask me to teach you one, and I will provide the notes to go along.";
-
-// these are messages when a song requested was invalid
-const noSongMessage = "Sorry, I didn't hear a song name. Which song do you want to learn?";
-const noSongRepeatMessage = "Would you like me to teach you a song? If so, please provide me " +
-    "the song name. For example, say something like, Teach me how to play Twinkle Twinkle Little Star.";
-
-// these are messages when a guess is made for a game, but no game is in progress
-const noGameMessage = "Sorry, no game is currently in-progress. If you would like to begin the music " +
-    "note game, just say, 'Play musical note guessing game.'";
-const noGameReminderMessage = "Are you interested in playing the music guessing game? If so, " +
-    "just say, 'Play musical note guessing game' and I will play the first note.";
-
-// this is the message after the chord lesson is taught
-const repromptChordMessage = "Would you like to learn another lesson? If so, " +
-    "please say something like, List Lessons, and I will read out what is " +
-    "currently available.";
+// this is the help message during the setup at the beginning of the skill
+const helpMessage = "This skill gives you the ability to play with a virtual cat inside your Alexa. " +
+    "Kitty likes to interact with you. Say things like 'Throw kitty the ball', 'Dance kitty', " +
+    "'Feed the kitty', or 'Play with kitty'.";
 
 // This is the message indicating that a non-screen Alexa is attempting to use the skill
 const noVideoMessage = "Sorry, this skill requires a video player. For example, an Echo Show " +
@@ -69,10 +47,11 @@ const musicBackground = 'https://s3.amazonaws.com/pianoplayerskill/logos/pianoKe
 const pianoStrings = 'https://s3.amazonaws.com/pianoplayerskill/logos/pianoStrings.jpg';
 
 // These are the folders where the mp3 & mp4 files are located
-const audioLoc = 'https://s3.amazonaws.com/pianoplayerskill/audio/';
-const videoLoc = 'https://s3.amazonaws.com/pianoplayerskill/media/';
-const musicNoteFolder = "\"https://s3.amazonaws.com/pianoplayerskill/musicNotes/";
-const chordExample = 'https://s3.amazonaws.com/pianoplayerskill/musicChords/CMajorChord.mp3';
+const videoLoc = 'https://s3.amazonaws.com/purplekitty';
+
+// titles played on the video player
+const skillTitle = "Purple Kitty";
+const skillDesc = "Your Friendly Cat";
 
 // --------------- Handlers -----------------------
 
@@ -93,9 +72,9 @@ var newSessionHandler = {
         // Display.RenderTemplate directives can be added to the response
         const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
         const imageLoc = musicBackground;
-        const template = builder.setTitle('Your Personal Instructor')
+        const template = builder.setTitle(skillDesc)
                                                         .setBackgroundImage(makeImage(imageLoc))
-                                                        .setTextContent(makePlainText('Piano Teacher'))
+                                                        .setTextContent(makePlainText(skillTitle))
                                                         .build();
 
         if (this.event.context.System.device.supportedInterfaces.Display) {
@@ -104,7 +83,7 @@ var newSessionHandler = {
             this.attributes['EchoShow'] = true;
             this.emit(':responseReady');
 
-            const videoClip = "https://s3.amazonaws.com/purplekitty/Kitty.mp4";
+            const videoClip = videoLoc + "Kitty.mp4";
             const metadata = {
                 'title': 'Purple Kitty'
             };
@@ -124,7 +103,117 @@ var newSessionHandler = {
     'Dance': function() {
         // move next utterance to use start mode
         this.handler.state = states.STARTMODE;
-	this.emit('PlayScale');
+        // Display.RenderTemplate directives can be added to the response
+        const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
+        const imageLoc = musicBackground;
+        const template = builder.setTitle(skillDesc)
+                                                        .setBackgroundImage(makeImage(imageLoc))
+                                                        .setTextContent(makePlainText(skillTitle))
+                                                        .build();
+
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+            this.response.speak(welcomeMessage).listen(repeatWelcomeMessage).renderTemplate(template);
+            console.log("this was requested by an Echo Show");
+            this.attributes['EchoShow'] = true;
+            this.emit(':responseReady');
+
+            const videoClip = videoLoc + "Dance.mp4";
+            const metadata = {
+                'title': 'Purple Kitty'
+            };
+            this.response.playVideo(videoClip, metadata);
+            console.log("Invoked from video playing device");
+        } else {
+            this.attributes['EchoShow'] = false;
+            this.emit(':tell', noVideoMessage);
+        }
+    },
+    // this plays the dance video
+    'Feed': function() {
+        // move next utterance to use start mode
+        this.handler.state = states.STARTMODE;
+        // Display.RenderTemplate directives can be added to the response
+        const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
+        const imageLoc = musicBackground;
+        const template = builder.setTitle(skillDesc)
+                                                        .setBackgroundImage(makeImage(imageLoc))
+                                                        .setTextContent(makePlainText(skillTitle))
+                                                        .build();
+
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+            this.response.speak(welcomeMessage).listen(repeatWelcomeMessage).renderTemplate(template);
+            console.log("this was requested by an Echo Show");
+            this.attributes['EchoShow'] = true;
+            this.emit(':responseReady');
+
+            const videoClip = videoLoc + "Feed.mp4";
+            const metadata = {
+                'title': 'Purple Kitty'
+            };
+            this.response.playVideo(videoClip, metadata);
+            console.log("Invoked from video playing device");
+        } else {
+            this.attributes['EchoShow'] = false;
+            this.emit(':tell', noVideoMessage);
+        }
+    },
+    // this plays the dance video
+    'ThrowBall': function() {
+        // move next utterance to use start mode
+        this.handler.state = states.STARTMODE;
+        // Display.RenderTemplate directives can be added to the response
+        const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
+        const imageLoc = musicBackground;
+        const template = builder.setTitle(skillDesc)
+                                                        .setBackgroundImage(makeImage(imageLoc))
+                                                        .setTextContent(makePlainText(skillTitle))
+                                                        .build();
+
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+            this.response.speak(welcomeMessage).listen(repeatWelcomeMessage).renderTemplate(template);
+            console.log("this was requested by an Echo Show");
+            this.attributes['EchoShow'] = true;
+            this.emit(':responseReady');
+
+            const videoClip = videoLoc + "Ball.mp4";
+            const metadata = {
+                'title': 'Purple Kitty'
+            };
+            this.response.playVideo(videoClip, metadata);
+            console.log("Invoked from video playing device");
+        } else {
+            this.attributes['EchoShow'] = false;
+            this.emit(':tell', noVideoMessage);
+        }
+    },
+    // this plays the basic cat video
+    'Play': function() {
+        // move next utterance to use start mode
+        this.handler.state = states.STARTMODE;
+        // Display.RenderTemplate directives can be added to the response
+        const builder = new Alexa.templateBuilders.BodyTemplate1Builder();
+        const imageLoc = musicBackground;
+        const template = builder.setTitle(skillDesc)
+                                                        .setBackgroundImage(makeImage(imageLoc))
+                                                        .setTextContent(makePlainText(skillTitle))
+                                                        .build();
+
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+            this.response.speak(welcomeMessage).listen(repeatWelcomeMessage).renderTemplate(template);
+            console.log("this was requested by an Echo Show");
+            this.attributes['EchoShow'] = true;
+            this.emit(':responseReady');
+
+            const videoClip = videoLoc + "Kitty.mp4";
+            const metadata = {
+                'title': 'Purple Kitty'
+            };
+            this.response.playVideo(videoClip, metadata);
+            console.log("Invoked from video playing device");
+        } else {
+            this.attributes['EchoShow'] = false;
+            this.emit(':tell', noVideoMessage);
+        }
     },
     'Unhandled': function () {
         console.log("Unhandled event");
