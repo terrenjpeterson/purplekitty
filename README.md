@@ -7,6 +7,6 @@ This is a video skill for the Alexa platform. It provides the ability to interac
 - [How does this work?](#skill-overview)
 
 
-##Skill Overview
+## Skill Overview
 
 The skill works by mapping intents provided by a user to identify different short video clips that are then sent back to the Alexa device.
