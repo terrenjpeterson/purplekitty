@@ -2,6 +2,8 @@
 
 This is a video skill for the Alexa platform. It provides the ability to interact with a digital pet through mp4 files embedded in an Alexa skill.
 
+For a live demo of this skill, check out the entry on the [DevPost Alexa Kids Challenge](https://devpost.com/software/purple-kitty).
+
 ![](media/logo-108x108.png)
 
 **Table of Contents**
